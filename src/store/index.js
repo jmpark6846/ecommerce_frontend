@@ -1,4 +1,5 @@
+import { writable } from "svelte/store";
 import user from "./user";
-import modal from "./modal";
+const cart_items = writable([]);
 
-export { user, modal }
+export { user, cart_items }

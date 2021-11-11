@@ -8,3 +8,5 @@ export function stripTags(htmlStr){
   const txt = dom.body.textContent;
   return txt
 }
+
+export const DEFAULT_SHIPPING_FEE = 2500;
