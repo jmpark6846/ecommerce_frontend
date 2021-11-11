@@ -26,8 +26,11 @@ const weeks_chart_config = {
   type: 'bar',
   data: null,
   options: {
-    responsive: true,
+    maintainAspectRatio: false,
     plugins:{
+      legend: {
+        display: false,
+      },
       tooltip: {
         enabled:false
       },
@@ -63,6 +66,8 @@ function prepareForWeeksChart(data){
       weeks_data.push(0)
     }
   }
+  labels=[]
+  data.labels.forEach(date => labels.push(dayjs(date).format('MM.DD(dd)')));
   chart_data.labels = labels;
   chart_data.datasets[0].data = weeks_data;
   weeks_chart_config.data = chart_data;
@@ -93,7 +98,7 @@ onMount(async ()=>{
   <div class="flex  space-x-8">
     <div class='w-1/2'>
       <h2 class='text-2xl font-semibold mb-4'>이번주 매출 현황</h2>
-      <div>
+      <div style='height: 350px;'>
         <canvas id="weeks_chart"></canvas>
       </div>  
     </div>

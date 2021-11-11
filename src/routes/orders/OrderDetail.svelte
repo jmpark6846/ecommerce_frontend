@@ -7,7 +7,7 @@ import { user } from '../../store'
 export let navigate;
 
 const params = useParams();
-
+let loading = true;
 let order = {};
 let orderItems = []
 const ORDER_STATUS = {
@@ -24,6 +24,7 @@ onMount(async ()=> {
     const res = await api.get(`/orders/${$params.order_id}/`);
     order = res.data;
     orderItems = order['items']
+    loading = false;
   } catch (error) {
     console.error(error)    
   }
@@ -40,6 +41,7 @@ async function handleOrder(mockFail){
     const res = await api.post(`/orders/${order.id}/proceed_payment/`, data);
     order = res.data['order']
     orderItems = order['items']
+    alert('결제 완료하였습니다.')
   } catch (error) {
     console.error(error);
     alert('결제 실패하였습니다.')
@@ -47,13 +49,19 @@ async function handleOrder(mockFail){
 }
 
 </script>
-
+{#if loading }
+<div>loading..</div>
+{:else}
 <section class='lg:max-w-5xl mx-auto h-full py-8'>
   <h1 class='text-3xl font-bold mb-4'>주문 상세 보기 </h1>
   <div class='mb-4'>
-    <span>주문일자</span>
-    <span class='ml-2'>{dayjs(order.ordered_at).format('YYYY.MM.DD  A h:mm')}</span>
-    <span class='text-center'>{ORDER_STATUS[order.status]}</span>
+    <div>
+      <span class='font-semibold'>주문일자</span>
+      <span class='text-gray-500 ml-1'>{dayjs(order.ordered_at).format('YYYY.MM.DD  A h:mm')}</span>
+      <span class='font-semibold ml-2'>{ORDER_STATUS[order.status]}</span>
+    </div>
+    
+    
   </div>
 
   <div class='flex space-x-4'>
@@ -121,3 +129,4 @@ async function handleOrder(mockFail){
     </div>
   </div>
 </section>
+{/if}

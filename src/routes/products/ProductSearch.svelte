@@ -44,7 +44,7 @@ async function fetchSearchResult(page_num=1){
       <div style='height: 280px;' >
         <img class='object-cover w-full h-full rounded bg-gray-50 border border-gray-100' src={product.image.file} alt="{product.name}" /> 
       </div>
-      <div class='text-2xl text-center my-2'>{product.name}</div>
+      <div class='text-xl text-center my-2'>{product.name}</div>
     </div>
     {/each}
   </div>

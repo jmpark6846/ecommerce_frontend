@@ -109,7 +109,7 @@ async function handleClickAddToCart(options){
 <section class='lg:max-w-5xl mx-auto h-full py-8'>
   <div class='product-info grid grid-cols-1 lg:grid-cols-2 space-y-4'>
     <div class='product-image-box col-start-1 flex justify-center'>
-      <img class='object-cover max-w-lg max-h-72 rounded bg-gray-50 border border-gray-100' src={product.productimage_set[0].file} alt="artwork" /> 
+      <img class='object-cover max-w-lg max-h-72 rounded bg-gray-50' src={product.productimage_set[0].file} alt="artwork" /> 
     </div>
     <div class='product-info-box col-start-1 row-start-2 lg:col-start-2 lg:row-start-1 px-4 '>
       <h1 class='text-2xl font-bold'>{product.name}</h1>
