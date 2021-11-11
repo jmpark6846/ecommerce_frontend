@@ -30,6 +30,15 @@ onMount(async ()=> {
   }
 });
 
+async function handleCancel(){
+  try {
+    const res = await api.put(`/orders/${order.id}/cancel/`);
+    order = res.data
+  } catch (error) {
+    console.error(error);
+  }  
+}
+
 async function handleOrder(mockFail){
   let data = {payment_method: 'kakaopay'}
 
@@ -120,11 +129,15 @@ async function handleOrder(mockFail){
         </div>
 
         {#if [0,2].includes(order.status) }
-          <button class='px-4 py-2 w-full bg-green-500 hover:bg-green-600 text-gray-50 hover:text-white' on:click={async()=>handleOrder()}>
-            {order.status == 1 ? '결제하기' : '결제 재시도'}
+          <button class='px-4 py-2 w-full mb-4 bg-green-500 hover:bg-green-600 text-gray-50 hover:text-white' on:click={async()=>handleOrder()}>
+            {order.status == 0 ? '결제하기' : '결제 재시도'}
           </button>
         {/if}
-        
+        {#if order.status === 2 }
+        <button class='px-4 py-2 w-full bg-gray-600 hover:bg-gray-700 text-white' on:click={async()=>handleCancel()}>
+          주문 취소
+        </button>
+        {/if}
       </div>
     </div>
   </div>

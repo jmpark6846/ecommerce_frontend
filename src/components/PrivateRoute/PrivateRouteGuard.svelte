@@ -7,9 +7,10 @@
 
   $: if (!$user) {
     navigate("/login", {
-      state: { from: $location.pathname },
-      replace: true,
-    });
+      state: { from: $location.pathname }
+    })
+  }else if($user.is_staff){
+    navigate("/admin/");
   }
 </script>
 

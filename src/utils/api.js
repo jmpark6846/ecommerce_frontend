@@ -25,8 +25,7 @@ api.interceptors.response.use(response=>response, async error=> {
       return api.post('accounts/logout/')
       .then(res=>{
         user.set(null);
-        const from = ($location.state && $location.state.from) || "/login";
-        navigate(from, { replace: true });
+        navigate('/login/');
       })
       .catch(err=>console.error(err))
     }
