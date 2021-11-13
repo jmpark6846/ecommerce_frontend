@@ -25,7 +25,7 @@ function calTotalProductAmount(items){
 
 onMount(async ()=> {
   try {
-    const res = await api.get(`/accounts/${$user.pk}/cart/`);
+    const res = await api.get(`/cart/`);
     cartItems = res.data
   } catch (error) {
     console.error(error)    
@@ -34,7 +34,7 @@ onMount(async ()=> {
 async function handleQtyChange(item){
   const { id, qty } = item;
   try{
-    const res = await api.patch(`/accounts/${$user.pk}/cart/`, {id, qty});
+    const res = await api.patch(`/cart/`, {id, qty});
   }catch(error){
     console.error(error);
   }
@@ -43,7 +43,7 @@ async function handleDeleteFromCart(cartItemIds){
   if(confirm('해당 장바구니 품목을 삭제하시겠습니까?')){
     try {
       // data = JSON.stringify(data)
-      const res = await api.put(`/accounts/${$user.pk}/cart/`, cartItemIds);
+      const res = await api.put(`/cart/`, cartItemIds);
       cartItems = cartItems.filter(item => !cartItemIds.includes(item.id))
     } catch (error) {
       console.error(error) 
@@ -64,7 +64,7 @@ async function handleOrder(mockFail){
   }
 
   try {
-    let res = await api.post(`/accounts/${$user.pk}/cart/checkout/`);
+    let res = await api.post(`/cart/checkout/`);
     let order = res.data['order']
     res = await api.post(`/orders/${order.id}/proceed_payment/`, data);
     navigate(`/orders/${order.id}/`);

@@ -85,7 +85,7 @@ async function handleClickAddToCart(options){
     }
 
     try {
-      const res = await api.post(`/accounts/${$user.pk}/cart/`, data);
+      const res = await api.post(`/cart/`, data);
       console.log(res.data)
       if(confirm('장바구니에 추가하였습니다. 장바구니로 이동하시겠습니까?')){
         navigate('/cart/', { replace: true })
